@@ -1,7 +1,7 @@
 from sqlmodel import Session, select
 
-from src.models.plan_model import Plan
-from src.schemas.plan_schema import PlanCreate, PlanUpdate
+from models.plan_model import Plan
+from schemas.plan_schema import PlanCreate, PlanUpdate
 
 
 def create_plan(session: Session, data: PlanCreate):

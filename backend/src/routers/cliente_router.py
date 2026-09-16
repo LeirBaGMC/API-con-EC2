@@ -1,17 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 
-from src.crud.cliente_crud import (
+from crud.cliente_crud import (
     create_cliente,
     delete_cliente,
     get_cliente,
     get_clientes,
     update_cliente,
 )
-from src.database.database import get_session
-from src.models.cliente_model import Cliente
-from src.schemas.cliente_schema import ClienteCreate, ClienteUpdate
-
+from database.database import get_session
+from models.cliente_model import Cliente
+from schemas.cliente_schema import ClienteCreate, ClienteUpdate
 
 router = APIRouter(
     prefix="/clientes",
@@ -32,34 +31,27 @@ def get_all(session: Session = Depends(get_session)):
 @router.get("/{cliente_id}", response_model=Cliente)
 def get_by_id(cliente_id: int, session: Session = Depends(get_session)):
     cliente = get_cliente(session, cliente_id)
-
     if not cliente:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
-
     return cliente
 
 
-@router.patch("/{cliente_id}", response_model=Cliente)
+@router.put("/{cliente_id}", response_model=Cliente)
 def update(
     cliente_id: int,
     data: ClienteUpdate,
     session: Session = Depends(get_session),
 ):
     cliente = get_cliente(session, cliente_id)
-
     if not cliente:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
-
     return update_cliente(session, cliente, data)
 
 
 @router.delete("/{cliente_id}")
 def delete(cliente_id: int, session: Session = Depends(get_session)):
     cliente = get_cliente(session, cliente_id)
-
     if not cliente:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
-
     delete_cliente(session, cliente)
-
     return {"message": "Cliente eliminado correctamente"}

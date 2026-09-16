@@ -1,7 +1,7 @@
 from sqlmodel import Session, select
 
-from src.models.cliente_model import Cliente
-from src.schemas.cliente_schema import ClienteCreate, ClienteUpdate
+from models.cliente_model import Cliente
+from schemas.cliente_schema import ClienteCreate, ClienteUpdate
 
 
 def create_cliente(session: Session, data: ClienteCreate):

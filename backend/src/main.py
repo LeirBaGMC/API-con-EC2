@@ -2,9 +2,9 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from src.database.database import create_database
-from src.routers.cliente_router import router as cliente_router
-from src.routers.plan_router import router as plan_router
+from database.database import create_database
+from routers.cliente_router import router as cliente_router
+from routers.plan_router import router as plan_router
 
 
 @asynccontextmanager
