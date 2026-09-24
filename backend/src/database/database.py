@@ -1,21 +1,29 @@
-from pathlib import Path
+import os
+from urllib.parse import quote_plus
+from dotenv import load_dotenv, find_dotenv
 from sqlmodel import Session, SQLModel, create_engine
 
-# Resuelve la ruta hacia backend/ (database.py -> database/ -> src/ -> backend/)
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-DB_PATH = BASE_DIR / "insurance.db"
+load_dotenv(find_dotenv())
 
-DATABASE_URL = f"sqlite:///{DB_PATH}"
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "postgres")
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+DB_NAME = os.getenv("DB_NAME", "postgres")
+
+ENCODED_PASSWORD = quote_plus(DB_PASSWORD)
+
+DATABASE_URL = f"postgresql+psycopg2://{DB_USER}:{ENCODED_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 engine = create_engine(
     DATABASE_URL,
-    connect_args={"check_same_thread": False},
+    echo=False
 )
 
-
 def create_database():
+    from models.cliente_model import Cliente
+    from models.plan_model import Plan
     SQLModel.metadata.create_all(engine)
-
 
 def get_session():
     with Session(engine) as session:
