@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { User, Mail, Video, Upload, Trash2, Edit3, Eye, Calendar, PlusCircle, AlertCircle } from 'lucide-react';
+import { Mail, Video, Upload, Trash2, Edit3, Eye, Calendar, PlusCircle, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../services/api';
 import { MainLayout } from '../components/templates/MainLayout';

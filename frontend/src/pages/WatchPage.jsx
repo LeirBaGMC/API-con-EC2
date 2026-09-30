@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Eye, Calendar, User, AlertCircle, Share2, Sparkles } from 'lucide-react';
+import { Eye, Calendar, AlertCircle, Share2, Sparkles } from 'lucide-react';
 import { api } from '../services/api';
 import { MainLayout } from '../components/templates/MainLayout';
 import { VideoPlayer } from '../components/organisms/VideoPlayer';
