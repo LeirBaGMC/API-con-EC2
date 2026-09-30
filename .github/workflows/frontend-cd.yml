@@ -57,6 +57,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+          role-skip-session-tagging: true
 
       - name: Sync static assets to S3
         run: |
