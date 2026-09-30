@@ -4,7 +4,7 @@
     {
       "Effect": "Allow",
       "Principal": {
-        "Federated": "arn:aws:iam::<TU_ID_DE_CUENTA_AWS>:oidc-provider/token.actions.githubusercontent.com"
+        "Federated": "arn:aws:iam::520369550160:oidc-provider/token.actions.githubusercontent.com"
       },
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
@@ -12,7 +12,13 @@
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
         },
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": "repo:LeirBaGMC/API-con-EC2:*"
+          "token.actions.githubusercontent.com:sub": [
+            "repo:LeirBaGMC/API-con-EC2:*",
+            "repo:leirbagmc/API-con-EC2:*",
+            "repo:leirbagmc/api-con-ec2:*",
+            "repo:LeirBaGMC/api-con-ec2:*",
+            "repo:*:API-con-EC2:*"
+          ]
         }
       }
     }

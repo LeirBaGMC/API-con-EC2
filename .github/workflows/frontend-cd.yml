@@ -17,6 +17,9 @@ jobs:
   deploy:
     name: Build & Deploy to S3
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     defaults:
       run:
@@ -42,12 +45,18 @@ jobs:
           VITE_YOUTUBE_API_KEY: ${{ secrets.VITE_YOUTUBE_API_KEY }}
         run: npm run build
 
+      - name: Inspect OIDC Token (Debug)
+        run: |
+          echo "=== Diagnosticando Token OIDC de GitHub ==="
+          TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r '.value')
+          echo "Payload JWT que GitHub envía a AWS:"
+          echo "$TOKEN" | cut -d. -f2 | base64 -d | jq '{aud, iss, sub, repository, repository_owner, ref}'
+
       - name: Authenticate with AWS via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
-          audience: sts.amazonaws.com
 
       - name: Sync static assets to S3
         run: |
