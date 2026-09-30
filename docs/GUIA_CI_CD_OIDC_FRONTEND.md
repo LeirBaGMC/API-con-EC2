@@ -45,11 +45,11 @@ flowchart TD
 ### Paso 1: Configurar AWS con OIDC (Elige Opción A o B)
 
 #### Opción A: Despliegue Rápido con CloudFormation (Recomendado)
-Usa la plantilla ubicada en [`aws/frontend-oidc-s3-setup.yml`](file:///c:/Users/Pandora/Desktop/API-con-EC2/aws/frontend-oidc-s3-setup.yml):
+Usa la plantilla ubicada en [`aws/frontend-oidc-s3-setup.yml`](../aws/frontend-oidc-s3-setup.yml):
 
 1. Abre la consola de **AWS CloudFormation** en la región deseada (ej. `us-east-1`).
 2. Haz clic en **Create stack** -> **With new resources (standard)**.
-3. Selecciona **Upload a template file** y sube [`aws/frontend-oidc-s3-setup.yml`](file:///c:/Users/Pandora/Desktop/API-con-EC2/aws/frontend-oidc-s3-setup.yml).
+3. Selecciona **Upload a template file** y sube [`aws/frontend-oidc-s3-setup.yml`](../aws/frontend-oidc-s3-setup.yml).
 4. Parámetros del stack:
    - `GitHubOrgOrUser`: `LeirBaGMC`
    - `GitHubRepoName`: `API-con-EC2`
@@ -71,9 +71,55 @@ Usa la plantilla ubicada en [`aws/frontend-oidc-s3-setup.yml`](file:///c:/Users/
 2. **Crear el Rol IAM (`GitHubActionsFrontendRole`)**:
    - En *Trusted entity type* selecciona **Web identity**.
    - Selecciona el proveedor `token.actions.githubusercontent.com` y audiencia `sts.amazonaws.com`.
-   - Edita la política de confianza con [`aws/trust-policy.json`](file:///c:/Users/Pandora/Desktop/API-con-EC2/aws/trust-policy.json).
+   - Edita la política de confianza con la siguiente estructura (reemplaza `<TU_AWS_ACCOUNT_ID>`):
+     ```json
+     {
+       "Version": "2012-10-17",
+       "Statement": [
+         {
+           "Effect": "Allow",
+           "Principal": {
+             "Federated": "arn:aws:iam::<TU_AWS_ACCOUNT_ID>:oidc-provider/token.actions.githubusercontent.com"
+           },
+           "Action": [
+             "sts:AssumeRoleWithWebIdentity",
+             "sts:TagSession"
+           ],
+           "Condition": {
+             "StringLike": {
+               "token.actions.githubusercontent.com:sub": [
+                 "*API-con-EC2*",
+                 "*api-con-ec2*"
+               ]
+             }
+           }
+         }
+       ]
+     }
+     ```
 3. **Adjuntar Política de Permisos S3 al Rol**:
-   - Crea una política inline o gestionada usando [`aws/s3-policy.json`](file:///c:/Users/Pandora/Desktop/API-con-EC2/aws/s3-policy.json), reemplazando el nombre del bucket de tu frontend.
+   - Crea una política inline o gestionada usando la siguiente definición (reemplaza `<TU_BUCKET_S3_FRONTEND>`):
+     ```json
+     {
+       "Version": "2012-10-17",
+       "Statement": [
+         {
+           "Sid": "S3FrontendDeployPermissions",
+           "Effect": "Allow",
+           "Action": [
+             "s3:PutObject",
+             "s3:GetObject",
+             "s3:ListBucket",
+             "s3:DeleteObject"
+           ],
+           "Resource": [
+             "arn:aws:s3:::<TU_BUCKET_S3_FRONTEND>",
+             "arn:aws:s3:::<TU_BUCKET_S3_FRONTEND>/*"
+           ]
+         }
+       ]
+     }
+     ```
 4. **Habilitar Static Website Hosting en tu Bucket S3**:
    - Activar Website Hosting: Index document = `index.html`, Error document = `index.html`.
 
