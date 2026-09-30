@@ -11,8 +11,8 @@
         "s3:DeleteObject"
       ],
       "Resource": [
-        "arn:aws:s3:::<NOMBRE_DE_TU_BUCKET_FRONTEND>",
-        "arn:aws:s3:::<NOMBRE_DE_TU_BUCKET_FRONTEND>/*"
+        "arn:aws:s3:::api-ec2-frontend-prod-leirbag",
+        "arn:aws:s3:::api-ec2-frontend-prod-leirbag/*"
       ]
     }
   ]
