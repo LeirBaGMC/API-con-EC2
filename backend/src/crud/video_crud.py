@@ -141,5 +141,11 @@ def delete_video(session: Session, video: Video):
     for comment in comments:
         session.delete(comment)
 
+    # Delete files from S3 if applicable
+    from services.s3_service import delete_file_from_s3_or_local
+    delete_file_from_s3_or_local(video.video_url)
+    delete_file_from_s3_or_local(video.thumbnail_url)
+
     session.delete(video)
     session.commit()
+

@@ -4,6 +4,7 @@ import uuid
 import shutil
 from pathlib import Path
 from typing import Tuple
+from urllib.parse import urlparse
 import boto3
 from botocore.exceptions import BotoCoreError, ClientError
 from fastapi import HTTPException, UploadFile, status
@@ -158,3 +159,32 @@ async def upload_video_and_thumbnail(
         thumbnail_url = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=60"
 
     return video_url, thumbnail_url
+
+
+def delete_file_from_s3_or_local(file_url: str):
+    """
+    Deletes object from S3 if it's an S3 URL, or deletes local file if local fallback.
+    """
+    if not file_url:
+        return
+
+    # Check if URL belongs to S3
+    if ".amazonaws.com/" in file_url:
+        try:
+            parsed = urlparse(file_url)
+            # Host format: <bucket>.s3.<region>.amazonaws.com
+            bucket = parsed.netloc.split(".s3.")[0]
+            key = parsed.path.lstrip("/")
+            s3 = get_s3_client()
+            s3.delete_object(Bucket=bucket, Key=key)
+            print(f"[S3] Objeto eliminado exitosamente: {bucket}/{key}")
+        except Exception as e:
+            print(f"[S3 ADVERTENCIA] No se pudo eliminar el objeto en S3 ({e})")
+    elif file_url.startswith("/static/uploads/"):
+        # Local file
+        local_path = Path("." + file_url)
+        if local_path.exists():
+            try:
+                local_path.unlink()
+            except Exception:
+                pass
