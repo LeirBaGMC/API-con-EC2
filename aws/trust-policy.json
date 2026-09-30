@@ -6,18 +6,15 @@
       "Principal": {
         "Federated": "arn:aws:iam::520369550160:oidc-provider/token.actions.githubusercontent.com"
       },
-      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Action": [
+        "sts:AssumeRoleWithWebIdentity",
+        "sts:TagSession"
+      ],
       "Condition": {
-        "StringEquals": {
-          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
-        },
         "StringLike": {
           "token.actions.githubusercontent.com:sub": [
-            "repo:LeirBaGMC/API-con-EC2:*",
-            "repo:leirbagmc/API-con-EC2:*",
-            "repo:leirbagmc/api-con-ec2:*",
-            "repo:LeirBaGMC/api-con-ec2:*",
-            "repo:*:API-con-EC2:*"
+            "*API-con-EC2*",
+            "*api-con-ec2*"
           ]
         }
       }
