@@ -5,6 +5,7 @@ import { HomePage } from './pages/HomePage';
 import { WatchPage } from './pages/WatchPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AuthPage } from './pages/AuthPage';
+import { YouTubeTestPage } from './pages/YouTubeTestPage';
 
 export function App() {
   return (
@@ -23,6 +24,9 @@ export function App() {
           {/* Página 4: Perfil de usuario, gestión y publicación de videos */}
           <Route path="/profile" element={<ProfilePage />} />
 
+          {/* Ruta temporal de pruebas para UX con API de YouTube */}
+          <Route path="/test-youtube" element={<YouTubeTestPage />} />
+
           {/* Ruta por defecto */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -30,5 +34,6 @@ export function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;

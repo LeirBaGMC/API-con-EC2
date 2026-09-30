@@ -51,26 +51,22 @@ export const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-950 px-4 py-12 relative overflow-hidden">
-      {/* Background glow effects */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="min-h-screen flex items-center justify-center bg-[#05070f] px-4 py-12 relative overflow-hidden">
       <div className="w-full max-w-md relative z-10">
         {/* Brand header */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2.5 mb-4 group">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-xl shadow-indigo-500/30 group-hover:scale-105 transition-transform">
-              <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+            <div className="w-12 h-12 rounded-2xl border border-[#bcd3ff]/70 bg-[#f4f8ff] flex items-center justify-center shadow-xl shadow-[rgba(122,167,255,0.18)] group-hover:scale-105 transition-transform">
+              <Play className="w-6 h-6 text-[#0d1320] fill-current ml-0.5" />
             </div>
-            <span className="text-2xl font-extrabold tracking-tight">
+            <span className="text-2xl font-extrabold tracking-tight text-[#f8fbff]">
               Cloud<span className="text-gradient">Tube</span>
             </span>
           </Link>
-          <h1 className="text-2xl font-bold text-slate-100">
+          <h1 className="text-2xl font-bold text-[#f8fbff]">
             {isRegister ? 'Crea tu cuenta' : 'Bienvenido de nuevo'}
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#98a2b3] mt-1">
             {isRegister
               ? 'Únete a la plataforma para publicar y reproducir videos'
               : 'Ingresa tus credenciales para acceder a tu cuenta'}
@@ -78,7 +74,7 @@ export const AuthPage = () => {
         </div>
 
         {/* Auth Card */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-800">
+        <div className="glass-panel rounded-3xl p-6 sm:p-8">
           {error && (
             <div className="mb-5 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2.5">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />
@@ -135,8 +131,8 @@ export const AuthPage = () => {
           </form>
 
           {/* Toggle Login / Register */}
-          <div className="mt-6 pt-5 border-t border-slate-800/80 text-center">
-            <p className="text-xs text-slate-400">
+          <div className="mt-6 pt-5 border-t border-[#7aa7ff]/12 text-center">
+            <p className="text-xs text-[#98a2b3]">
               {isRegister ? '¿Ya tienes una cuenta?' : '¿No tienes una cuenta?'}
               <button
                 type="button"
@@ -144,7 +140,7 @@ export const AuthPage = () => {
                   setIsRegister(!isRegister);
                   setError('');
                 }}
-                className="ml-1.5 text-indigo-400 font-semibold hover:text-indigo-300 hover:underline cursor-pointer"
+                className="ml-1.5 text-[#bcd3ff] font-semibold hover:text-[#ffffff] hover:underline cursor-pointer"
               >
                 {isRegister ? 'Inicia sesión aquí' : 'Regístrate aquí'}
               </button>
@@ -154,7 +150,7 @@ export const AuthPage = () => {
 
         {/* Back link */}
         <div className="text-center mt-6">
-          <Link to="/" className="text-xs text-slate-500 hover:text-slate-300 transition-colors">
+          <Link to="/" className="text-xs text-[#778295] hover:text-[#d8dee8] transition-colors">
             ← Volver a la página principal
           </Link>
         </div>

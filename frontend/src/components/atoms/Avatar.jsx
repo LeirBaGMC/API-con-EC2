@@ -23,7 +23,7 @@ export const Avatar = ({
 
   return (
     <div
-      className={`relative inline-flex items-center justify-center font-semibold rounded-full bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 text-white shadow-md shadow-indigo-500/20 select-none ring-2 ring-slate-900 ${
+      className={`relative inline-flex items-center justify-center font-semibold rounded-full border border-[#7aa7ff]/25 bg-[#141d2e] text-[#bcd3ff] select-none ring-2 ring-[#05070f] ${
         sizes[size] || sizes.md
       } ${className}`}
     >

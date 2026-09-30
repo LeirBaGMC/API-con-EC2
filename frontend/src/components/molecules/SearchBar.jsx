@@ -19,16 +19,16 @@ export const SearchBar = ({ onSearch, placeholder = 'Buscar videos por título o
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full max-w-xl">
+    <form onSubmit={handleSubmit} className="relative w-full">
       <div className="relative flex items-center">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-slate-900/90 text-slate-100 placeholder-slate-500 pl-11 pr-20 py-2.5 rounded-full border border-slate-800 hover:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm transition-all shadow-inner"
+          className="w-full rounded-full border border-[#7aa7ff]/15 bg-[#080d16] py-2.5 pl-11 pr-24 text-sm text-[#f8fbff] shadow-inner transition-all placeholder:text-[#6f7a8a] hover:border-[#7aa7ff]/30 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#7aa7ff]/35"
         />
-        <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+        <div className="absolute left-3.5 text-[#8c96a6] pointer-events-none">
           <Search className="w-4 h-4" />
         </div>
 
@@ -36,7 +36,7 @@ export const SearchBar = ({ onSearch, placeholder = 'Buscar videos por título o
           <button
             type="button"
             onClick={handleClear}
-            className="absolute right-12 text-slate-400 hover:text-slate-200 p-1 cursor-pointer transition-colors"
+            className="absolute right-12 text-[#8c96a6] hover:text-[#f8fbff] p-1 cursor-pointer transition-colors"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -44,7 +44,7 @@ export const SearchBar = ({ onSearch, placeholder = 'Buscar videos por título o
 
         <button
           type="submit"
-          className="absolute right-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full text-xs font-medium transition-colors cursor-pointer"
+          className="absolute right-1.5 cursor-pointer rounded-full border border-[#7aa7ff]/20 bg-[#111a2b] px-4 py-1.5 text-xs font-black text-[#dbe7ff] transition-colors hover:border-[#7aa7ff]/35 hover:bg-[#1a2942]"
         >
           Buscar
         </button>

@@ -36,9 +36,9 @@ export const CommentSection = ({ videoId, comments = [], onCommentAdded }) => {
     <div className="flex flex-col gap-6 pt-4">
       {/* Comments Header */}
       <div className="flex items-center gap-2">
-        <MessageSquare className="w-5 h-5 text-indigo-400" />
-        <h3 className="text-lg font-bold text-slate-100">
-          Comentarios <span className="text-slate-400 text-sm font-normal">({comments.length})</span>
+        <MessageSquare className="w-5 h-5 text-[#7aa7ff]" />
+        <h3 className="text-lg font-bold text-[#f8fbff]">
+          Comentarios <span className="text-[#98a2b3] text-sm font-normal">({comments.length})</span>
         </h3>
       </div>
 
@@ -52,7 +52,7 @@ export const CommentSection = ({ videoId, comments = [], onCommentAdded }) => {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Agrega un comentario público..."
-              className="w-full bg-slate-900 text-slate-100 placeholder-slate-500 p-3 rounded-xl border border-slate-800 hover:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm resize-none transition-all"
+              className="w-full bg-[#0b1220] text-[#f8fbff] placeholder:text-[#6f7a8a] p-3 rounded-xl border border-[#7aa7ff]/15 hover:border-[#7aa7ff]/30 focus:outline-none focus:ring-2 focus:ring-[#7aa7ff]/40 focus:border-transparent text-sm resize-none transition-all"
               disabled={submitting}
             />
             {error && <p className="text-xs text-rose-400 font-medium">{error}</p>}
@@ -71,10 +71,10 @@ export const CommentSection = ({ videoId, comments = [], onCommentAdded }) => {
           </div>
         </form>
       ) : (
-        <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 text-center">
-          <p className="text-xs text-slate-400">
+        <div className="p-4 rounded-xl bg-[#0d1320] border border-[#7aa7ff]/12 text-center">
+          <p className="text-xs text-[#98a2b3]">
             ¿Quieres unirte a la conversación?{' '}
-            <Link to="/auth?mode=login" className="text-indigo-400 font-semibold hover:underline">
+            <Link to="/auth?mode=login" className="text-[#bcd3ff] font-semibold hover:underline">
               Inicia sesión
             </Link>{' '}
             para dejar tu comentario.
@@ -83,13 +83,13 @@ export const CommentSection = ({ videoId, comments = [], onCommentAdded }) => {
       )}
 
       {/* Comments List */}
-      <div className="divide-y divide-slate-800/60">
+      <div className="divide-y divide-[#7aa7ff]/10">
         {comments.length > 0 ? (
           comments.map((comment) => (
             <CommentItem key={comment.id} comment={comment} />
           ))
         ) : (
-          <p className="text-xs text-slate-500 py-6 text-center">
+          <p className="text-xs text-[#778295] py-6 text-center">
             Aún no hay comentarios en este video. ¡Sé el primero en comentar!
           </p>
         )}

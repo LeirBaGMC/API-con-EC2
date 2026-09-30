@@ -51,24 +51,25 @@ export const EditVideoModal = ({ isOpen, onClose, video, onVideoUpdated }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="glass-panel w-full max-w-lg rounded-3xl p-6 lg:p-8 shadow-2xl relative border border-slate-700/60">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050607]/80 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="glass-panel w-full max-w-lg rounded-3xl p-6 lg:p-8 relative">
         <button
           type="button"
           onClick={onClose}
           disabled={loading}
-          className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-800/60 transition-colors cursor-pointer"
+          aria-label="Cerrar modal"
+          className="absolute top-5 right-5 text-[#98a2b3] hover:text-[#f8fbff] p-1 rounded-full hover:bg-[#17243a] transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+          <div className="w-10 h-10 rounded-2xl bg-[#7aa7ff]/10 border border-[#7aa7ff]/30 flex items-center justify-center text-[#bcd3ff]">
             <Edit3 className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-slate-100">Editar Video</h2>
-            <p className="text-xs text-slate-400">Actualiza la información de tu publicación</p>
+            <h2 className="text-xl font-bold text-[#f8fbff]">Editar Video</h2>
+            <p className="text-xs text-[#98a2b3]">Actualiza la información de tu publicación</p>
           </div>
         </div>
 
@@ -105,7 +106,7 @@ export const EditVideoModal = ({ isOpen, onClose, video, onVideoUpdated }) => {
             disabled={loading}
           />
 
-          <div className="flex items-center justify-end gap-3 mt-4 pt-4 border-t border-slate-800">
+          <div className="flex items-center justify-end gap-3 mt-4 pt-4 border-t border-[#7aa7ff]/12">
             <Button
               variant="secondary"
               size="md"

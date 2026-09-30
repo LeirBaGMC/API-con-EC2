@@ -15,7 +15,7 @@ export const VideoPlayer = ({ videoUrl, posterUrl, title }) => {
     : '';
 
   return (
-    <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl shadow-indigo-950/40 border border-slate-800">
+    <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-[#7aa7ff]/12">
       {resolvedVideoSrc ? (
         <video
           key={resolvedVideoSrc}
@@ -29,7 +29,7 @@ export const VideoPlayer = ({ videoUrl, posterUrl, title }) => {
           Tu navegador no soporta la reproducción de video HTML5.
         </video>
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center text-slate-500 gap-2">
+        <div className="w-full h-full flex flex-col items-center justify-center text-[#778295] gap-2">
           <p className="text-sm font-medium">Video no disponible</p>
         </div>
       )}

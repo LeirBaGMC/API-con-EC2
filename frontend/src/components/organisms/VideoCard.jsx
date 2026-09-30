@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Eye, Calendar, Play } from 'lucide-react';
+import { Calendar, Eye, MoreVertical, Play } from 'lucide-react';
 import { Avatar } from '../atoms/Avatar';
 import { Badge } from '../atoms/Badge';
 
-export const VideoCard = ({ video }) => {
+export const VideoCard = ({ video, variant = 'default' }) => {
   const formatDate = (dateString) => {
     if (!dateString) return 'Reciente';
     try {
@@ -33,56 +33,67 @@ export const VideoCard = ({ video }) => {
     ? `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}${video.thumbnail_url}`
     : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800';
 
+  const isFeatured = variant === 'featured';
+
   return (
     <Link
       to={`/watch/${video.id}`}
-      className="group flex flex-col bg-slate-900/60 hover:bg-slate-900/90 rounded-2xl overflow-hidden border border-slate-800/80 hover:border-slate-700 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1"
+      className={`interactive-lift animate-soft-enter group block min-w-0 rounded-3xl ${
+        isFeatured
+          ? 'overflow-hidden bg-[#0d1320]'
+          : 'bg-transparent'
+      }`}
     >
       {/* Thumbnail Container */}
-      <div className="relative aspect-video w-full overflow-hidden bg-slate-950">
+      <div className={`relative aspect-video w-full overflow-hidden bg-[#0d1320] ${
+        isFeatured ? 'rounded-t-2xl' : 'rounded-xl'
+      }`}>
         <img
           src={thumbnailSrc}
           alt={video.title}
           loading="lazy"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
           onError={(e) => {
             e.target.src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800';
           }}
         />
         
         {/* Play hover overlay */}
-        <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-xs">
-          <div className="w-12 h-12 rounded-full bg-indigo-600/90 text-white flex items-center justify-center shadow-lg shadow-indigo-600/50 scale-90 group-hover:scale-100 transition-transform">
-            <Play className="w-5 h-5 fill-white ml-0.5" />
+        <div className="absolute inset-0 flex items-center justify-center bg-[#05070f]/45 opacity-0 backdrop-blur-[1px] transition-opacity duration-300 group-hover:opacity-100">
+          <div className="flex h-12 w-12 scale-90 items-center justify-center rounded-full border border-[#bcd3ff]/70 bg-[#f4f8ff] text-[#0d1320] shadow-[0_12px_34px_rgba(122,167,255,0.22)] transition-transform duration-300 group-hover:scale-100">
+            <Play className="ml-0.5 h-5 w-5 fill-current" />
           </div>
         </div>
 
         {/* Views Badge overlay */}
-        <div className="absolute bottom-2.5 right-2.5">
-          <Badge size="sm" variant="default" className="bg-slate-950/80 text-white border-0 font-medium">
-            <Eye className="w-3 h-3 text-indigo-400" />
+        <div className="absolute bottom-2.5 right-2.5 flex items-center gap-2">
+          <Badge size="sm" variant="default" className="border border-[#7aa7ff]/12 bg-[#05070f]/80 font-bold text-[#f8fbff]">
+            <Eye className="w-3 h-3 text-[#7aa7ff]" />
             {formatViews(video.views)} vistas
           </Badge>
         </div>
       </div>
 
       {/* Video Info */}
-      <div className="p-4 flex gap-3 flex-1">
-        <Avatar name={video.user_name} size="sm" className="mt-0.5 flex-shrink-0" />
-        <div className="flex-1 min-w-0">
-          <h3 className="text-sm font-bold text-slate-100 line-clamp-2 group-hover:text-indigo-400 transition-colors leading-snug mb-1">
+      <div className={`flex gap-3 ${isFeatured ? 'p-4' : 'pt-3'}`}>
+        <Avatar name={video.user_name} size={isFeatured ? 'md' : 'sm'} className="mt-0.5 flex-shrink-0" />
+        <div className="min-w-0 flex-1">
+          <h3 className={`${isFeatured ? 'text-lg' : 'text-sm'} mb-1 line-clamp-2 font-bold leading-snug text-[#f8fbff] transition-colors group-hover:text-[#bcd3ff]`}>
             {video.title}
           </h3>
-          <p className="text-xs font-medium text-slate-400 truncate mb-1">
+          <p className="mb-1 truncate text-xs font-semibold text-[#98a2b3]">
             {video.user_name || 'Autor'}
           </p>
-          <div className="flex items-center gap-2 text-[11px] text-slate-500">
+          <div className="flex flex-wrap items-center gap-2 text-[11px] font-medium text-[#778295]">
             <span className="flex items-center gap-1">
-              <Calendar className="w-3 h-3 text-slate-500" />
+              <Calendar className="w-3 h-3 text-[#778295]" />
               {formatDate(video.created_at)}
             </span>
+            <span>•</span>
+            <span>{formatViews(video.views)} vistas</span>
           </div>
         </div>
+        <MoreVertical className="mt-1 h-4 w-4 shrink-0 text-[#778295] opacity-0 transition-opacity group-hover:opacity-100" />
       </div>
     </Link>
   );

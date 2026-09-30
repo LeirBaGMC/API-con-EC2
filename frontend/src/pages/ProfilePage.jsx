@@ -102,7 +102,7 @@ export const ProfilePage = () => {
       <MainLayout>
         <div className="py-32 flex flex-col items-center justify-center gap-3">
           <Spinner size="lg" />
-          <p className="text-xs text-slate-400 font-medium">Cargando perfil y videos...</p>
+          <p className="text-xs text-[#98a2b3] font-medium">Cargando perfil y videos...</p>
         </div>
       </MainLayout>
     );
@@ -131,19 +131,17 @@ export const ProfilePage = () => {
     <MainLayout>
       <div className="flex flex-col gap-8">
         {/* Profile Card Header */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800/80 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-indigo-600/10 via-purple-600/5 to-transparent rounded-full blur-2xl pointer-events-none" />
-
+        <div className="glass-panel rounded-3xl p-6 sm:p-8 relative overflow-hidden">
           <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 relative z-10">
             {/* Avatar & User Details */}
             <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
-              <Avatar name={profile.name} size="xl" className="shadow-2xl shadow-indigo-600/30" />
+              <Avatar name={profile.name} size="xl" className="shadow-2xl shadow-[rgba(122,167,255,0.16)]" />
               <div>
-                <h1 className="text-2xl font-extrabold text-slate-100 tracking-tight">
+                <h1 className="text-2xl font-extrabold text-[#f8fbff] tracking-tight">
                   {profile.name}
                 </h1>
-                <p className="text-xs text-slate-400 flex items-center justify-center sm:justify-start gap-1.5 mt-1">
-                  <Mail className="w-3.5 h-3.5 text-indigo-400" />
+                <p className="text-xs text-[#98a2b3] flex items-center justify-center sm:justify-start gap-1.5 mt-1">
+                  <Mail className="w-3.5 h-3.5 text-[#7aa7ff]" />
                   {profile.email}
                 </p>
                 <div className="flex items-center gap-3 mt-3">
@@ -151,7 +149,7 @@ export const ProfilePage = () => {
                     <Video className="w-3.5 h-3.5" />
                     {profile.videos_count} {profile.videos_count === 1 ? 'video' : 'videos'} publicados
                   </Badge>
-                  <span className="text-[11px] text-slate-500">
+                  <span className="text-[11px] text-[#778295]">
                     Miembro desde {formatDate(profile.created_at)}
                   </span>
                 </div>
@@ -175,18 +173,18 @@ export const ProfilePage = () => {
 
         {/* User Videos Section */}
         <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-900">
+          <div className="flex items-center justify-between pb-3 border-b border-[#7aa7ff]/12">
             <div>
-              <h2 className="text-lg font-bold text-slate-100 tracking-tight">
+              <h2 className="text-lg font-bold text-[#f8fbff] tracking-tight">
                 {isOwnProfile ? 'Mis Videos Subidos' : `Videos de ${profile.name}`}
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[#98a2b3]">
                 {isOwnProfile
                   ? 'Gestiona, actualiza y consulta el rendimiento de tus videos'
                   : 'Lista completa de videos publicados por este usuario'}
               </p>
             </div>
-            <span className="text-xs font-semibold text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+            <span className="text-xs font-semibold text-[#c7ced8] bg-[#0d1320] px-3 py-1 rounded-full border border-[#7aa7ff]/12">
               Total: {profile.videos?.length || 0}
             </span>
           </div>
@@ -204,10 +202,10 @@ export const ProfilePage = () => {
                 return (
                   <div
                     key={vid.id}
-                    className="flex flex-col bg-slate-900/60 rounded-2xl overflow-hidden border border-slate-800/80 hover:border-slate-700 transition-all duration-300"
+                    className="flex flex-col bg-[#0d1320] rounded-2xl overflow-hidden border border-[#7aa7ff]/10 hover:border-[#7aa7ff]/26 transition-all duration-300"
                   >
                     {/* Thumbnail */}
-                    <Link to={`/watch/${vid.id}`} className="relative aspect-video w-full bg-slate-950 overflow-hidden group">
+                    <Link to={`/watch/${vid.id}`} className="relative aspect-video w-full bg-[#05070f] overflow-hidden group">
                       <img
                         src={thumbnailSrc}
                         alt={vid.title}
@@ -217,8 +215,8 @@ export const ProfilePage = () => {
                         }}
                       />
                       <div className="absolute bottom-2 right-2">
-                        <Badge size="sm" variant="default" className="bg-slate-950/80 text-white font-medium border-0">
-                          <Eye className="w-3 h-3 text-indigo-400" />
+                        <Badge size="sm" variant="default" className="bg-[#05070f]/80 text-[#f8fbff] font-medium border border-[#7aa7ff]/12">
+                          <Eye className="w-3 h-3 text-[#7aa7ff]" />
                           {vid.views || 0}
                         </Badge>
                       </div>
@@ -229,14 +227,14 @@ export const ProfilePage = () => {
                       <div>
                         <Link
                           to={`/watch/${vid.id}`}
-                          className="text-sm font-bold text-slate-100 hover:text-indigo-400 transition-colors line-clamp-2 leading-snug"
+                          className="text-sm font-bold text-[#f8fbff] hover:text-[#bcd3ff] transition-colors line-clamp-2 leading-snug"
                         >
                           {vid.title}
                         </Link>
-                        <p className="text-xs text-slate-400 line-clamp-2 mt-1">
+                        <p className="text-xs text-[#98a2b3] line-clamp-2 mt-1">
                           {vid.description || 'Sin descripción'}
                         </p>
-                        <p className="text-[11px] text-slate-500 mt-2 flex items-center gap-1">
+                        <p className="text-[11px] text-[#778295] mt-2 flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
                           {formatDate(vid.created_at)}
                         </p>
@@ -244,7 +242,7 @@ export const ProfilePage = () => {
 
                       {/* Video Management Actions (Owner only) */}
                       {isOwnProfile && (
-                        <div className="flex items-center gap-2 pt-3 border-t border-slate-800/60">
+                        <div className="flex items-center gap-2 pt-3 border-t border-[#7aa7ff]/12">
                           <Button
                             variant="secondary"
                             size="sm"
@@ -271,12 +269,12 @@ export const ProfilePage = () => {
               })}
             </div>
           ) : (
-            <div className="py-16 text-center bg-slate-900/30 rounded-3xl border border-slate-800/60 max-w-md mx-auto">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mx-auto mb-3">
+            <div className="py-16 text-center bg-[#0d1320]/70 rounded-3xl border border-[#7aa7ff]/12 max-w-md mx-auto">
+              <div className="w-12 h-12 rounded-2xl bg-[#7aa7ff]/10 border border-[#7aa7ff]/28 flex items-center justify-center text-[#7aa7ff] mx-auto mb-3">
                 <Video className="w-6 h-6" />
               </div>
-              <h3 className="text-sm font-bold text-slate-200">No hay videos subidos</h3>
-              <p className="text-xs text-slate-400 mt-1 mb-5">
+              <h3 className="text-sm font-bold text-[#f8fbff]">No hay videos subidos</h3>
+              <p className="text-xs text-[#98a2b3] mt-1 mb-5">
                 {isOwnProfile
                   ? 'Aún no has publicado ningún video. Comienza subiendo tu primer video.'
                   : 'Este usuario aún no ha subido ningún video.'}

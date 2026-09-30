@@ -8,11 +8,11 @@ export const Badge = ({
   className = '',
 }) => {
   const variants = {
-    default: 'bg-slate-800/80 text-slate-300 border border-slate-700/50',
-    primary: 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20',
-    success: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-    warning: 'bg-amber-500/10 text-amber-400 border border-amber-500/20',
-    purple: 'bg-purple-500/10 text-purple-400 border border-purple-500/20',
+    default: 'bg-[#111a2b]/85 text-[#c7ced8] border border-[#7aa7ff]/15',
+    primary: 'bg-[#f4f8ff] text-[#0d1320] border border-[#bcd3ff]/70',
+    success: 'bg-emerald-500/10 text-emerald-200 border border-emerald-400/20',
+    warning: 'bg-[#7aa7ff]/12 text-[#bcd3ff] border border-[#7aa7ff]/25',
+    accent: 'bg-[#111a2b]/85 text-[#dbe7ff] border border-[#7aa7ff]/18',
   };
 
   const sizes = {

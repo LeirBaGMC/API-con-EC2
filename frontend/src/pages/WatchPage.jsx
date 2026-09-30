@@ -78,7 +78,7 @@ export const WatchPage = () => {
       <MainLayout>
         <div className="py-32 flex flex-col items-center justify-center gap-3">
           <Spinner size="lg" />
-          <p className="text-xs text-slate-400 font-medium">Cargando reproductor y video...</p>
+          <p className="text-xs text-[#98a2b3] font-medium">Cargando reproductor y video...</p>
         </div>
       </MainLayout>
     );
@@ -116,35 +116,35 @@ export const WatchPage = () => {
           />
 
           {/* Video Title */}
-          <h1 className="text-xl sm:text-2xl font-extrabold text-slate-100 tracking-tight leading-snug">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-[#f8fbff] tracking-tight leading-snug">
             {video.title}
           </h1>
 
           {/* Metadata & Actions Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#7aa7ff]/12">
             {/* Author info */}
             <div className="flex items-center gap-3">
               <Avatar name={video.user_name} size="md" />
               <div>
                 <Link
                   to={`/profile?userId=${video.user_id}`}
-                  className="text-sm font-bold text-slate-100 hover:text-indigo-400 transition-colors"
+                  className="text-sm font-bold text-[#f8fbff] hover:text-[#bcd3ff] transition-colors"
                 >
                   {video.user_name || 'Autor'}
                 </Link>
-                <p className="text-[11px] text-slate-400">Publicado en CloudTube</p>
+                <p className="text-[11px] text-[#98a2b3]">Publicado en CloudTube</p>
               </div>
             </div>
 
             {/* Views, Date & Share */}
             <div className="flex items-center gap-3">
               <Badge variant="primary" size="md">
-                <Eye className="w-3.5 h-3.5 text-indigo-400" />
+                <Eye className="w-3.5 h-3.5 text-[#0d1320]" />
                 {video.views} vistas
               </Badge>
 
               <Badge variant="default" size="md">
-                <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                <Calendar className="w-3.5 h-3.5 text-[#98a2b3]" />
                 {formatDate(video.created_at)}
               </Badge>
 
@@ -160,8 +160,8 @@ export const WatchPage = () => {
           </div>
 
           {/* Description Box */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 text-sm text-slate-300 leading-relaxed whitespace-pre-line">
-            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#0d1320] border border-[#7aa7ff]/12 text-sm text-[#d8dee8] leading-relaxed whitespace-pre-line">
+            <h4 className="text-xs font-bold text-[#98a2b3] uppercase tracking-wider mb-2">
               Descripción del Video
             </h4>
             {video.description || 'Sin descripción disponible para este video.'}
@@ -177,9 +177,9 @@ export const WatchPage = () => {
 
         {/* Right Column: Recommended Videos (1 Col) */}
         <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-2 pb-2 border-b border-slate-800/80">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <h3 className="text-base font-bold text-slate-100">Videos Recomendados</h3>
+          <div className="flex items-center gap-2 pb-2 border-b border-[#7aa7ff]/12">
+            <Sparkles className="w-4 h-4 text-[#7aa7ff]" />
+            <h3 className="text-base font-bold text-[#f8fbff]">Videos Recomendados</h3>
           </div>
 
           {recommended.length > 0 ? (
@@ -189,7 +189,7 @@ export const WatchPage = () => {
               ))}
             </div>
           ) : (
-            <p className="text-xs text-slate-500 py-8 text-center bg-slate-900/30 rounded-2xl border border-slate-800/40">
+            <p className="text-xs text-[#778295] py-8 text-center bg-[#0d1320]/70 rounded-2xl border border-[#7aa7ff]/10">
               No hay otros videos recomendados en este momento.
             </p>
           )}
