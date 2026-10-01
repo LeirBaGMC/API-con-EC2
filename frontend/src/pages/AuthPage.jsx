@@ -103,7 +103,7 @@ export const AuthPage = () => {
               type="email"
               required
               icon={Mail}
-              placeholder="nombre@ejemplo.com"
+              placeholder="gabominda@outlook.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
@@ -157,7 +157,7 @@ export const AuthPage = () => {
             to="/"
             className="text-xs text-[#778295] hover:text-[#d8dee8] transition-colors"
           >
-            ← Volver a la página principal
+            ← Vuelve porfa xd
           </Link>
         </div>
       </div>
