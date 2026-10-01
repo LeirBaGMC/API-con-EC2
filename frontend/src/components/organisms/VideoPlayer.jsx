@@ -1,17 +1,17 @@
 import React from 'react';
 
 export const VideoPlayer = ({ videoUrl, posterUrl, title }) => {
-  // Resolve video URL: if it's a relative path, prefix API base URL
+  const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:8080').trim().replace(/\/+$/, '');
   const resolvedVideoSrc = videoUrl?.startsWith('http')
     ? videoUrl
     : videoUrl
-    ? `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}${videoUrl}`
+    ? `${baseUrl}${videoUrl.startsWith('/') ? '' : '/'}${videoUrl}`
     : '';
 
   const resolvedPoster = posterUrl?.startsWith('http')
     ? posterUrl
     : posterUrl
-    ? `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}${posterUrl}`
+    ? `${baseUrl}${posterUrl.startsWith('/') ? '' : '/'}${posterUrl}`
     : '';
 
   return (

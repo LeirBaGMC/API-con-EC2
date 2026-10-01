@@ -26,11 +26,11 @@ export const VideoCard = ({ video, variant = 'default' }) => {
     return views;
   };
 
-  // Resolve thumbnail: check if starts with http or fallback
+  const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:8080').trim().replace(/\/+$/, '');
   const thumbnailSrc = video.thumbnail_url?.startsWith('http')
     ? video.thumbnail_url
     : video.thumbnail_url
-    ? `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}${video.thumbnail_url}`
+    ? `${baseUrl}${video.thumbnail_url.startsWith('/') ? '' : '/'}${video.thumbnail_url}`
     : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800';
 
   const isFeatured = variant === 'featured';
