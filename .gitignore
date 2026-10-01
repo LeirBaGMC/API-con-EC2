@@ -5,3 +5,6 @@ __pycache__/
 *.db
 .env
 static/uploads/
+
+# AWS IAM Policies (datos sensibles / account IDs)
+aws/*.json
