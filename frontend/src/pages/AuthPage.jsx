@@ -91,7 +91,7 @@ export const AuthPage = () => {
                 label="HOLA PROFE, COMO ESTA"
                 required
                 icon={User}
-                placeholder="Ej. Juan Pérez"
+                placeholder="Ej. GABRIEL ALEXANDER MINDA CARRION"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={loading}
