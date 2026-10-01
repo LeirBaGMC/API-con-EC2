@@ -34,7 +34,11 @@ export const Navbar = ({ onOpenUpload, onToggleSidebar }) => {
             <span className="hidden text-xl font-black tracking-tight text-[#f8fbff] sm:inline-block">
               CloudTube
             </span>
-            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-[#7aa7ff]/15 text-[#7aa7ff] border border-[#7aa7ff]/30 tracking-widest uppercase shadow-[0_0_12px_rgba(122,167,255,0.2)]">
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-bold bg-[#7aa7ff]/15 text-[#7aa7ff] border border-[#7aa7ff]/30 tracking-widest uppercase shadow-[0_0_12px_rgba(122,167,255,0.2)]">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#7aa7ff] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#7aa7ff]"></span>
+              </span>
               LIVE
             </span>
           </Link>
