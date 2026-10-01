@@ -1,5 +1,8 @@
-// Base URL configurable via environment variable for EC2 deployment
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+// Base URL configurable via environment variable, CloudFront or local dev
+export const API_BASE_URL =
+  import.meta.env.VITE_API_URL !== undefined
+    ? import.meta.env.VITE_API_URL
+    : (import.meta.env.DEV ? 'http://localhost:8080' : '');
 
 const getHeaders = (isFormData = false) => {
   const token = localStorage.getItem('token');
