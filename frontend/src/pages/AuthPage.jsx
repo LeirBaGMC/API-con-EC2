@@ -1,37 +1,40 @@
-import React, { useState } from 'react';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { Play, Lock, Mail, User, AlertCircle, ArrowRight } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import { Button } from '../components/atoms/Button';
-import { FormField } from '../components/molecules/FormField';
+import React, { useState } from "react";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { Play, Lock, Mail, User, AlertCircle, ArrowRight } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import { Button } from "../components/atoms/Button";
+import { FormField } from "../components/molecules/FormField";
 
 export const AuthPage = () => {
   const [searchParams] = useSearchParams();
-  const initialMode = searchParams.get('mode') === 'register' ? 'register' : 'login';
-  const [isRegister, setIsRegister] = useState(initialMode === 'register');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const initialMode =
+    searchParams.get("mode") === "register" ? "register" : "login";
+  const [isRegister, setIsRegister] = useState(initialMode === "register");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (isRegister && !name.trim()) {
-      setError('Por favor ingresa tu nombre completo.');
+      setError("Por favor ingresa tu nombre completo.");
       return;
     }
     if (!email.trim() || !password.trim()) {
-      setError('Por favor completa todos los campos.');
+      setError("Por favor completa todos los campos.");
       return;
     }
     if (password.length < 6) {
-      setError('La contraseña debe tener al menos 6 caracteres.');
+      setError(
+        "La contraseña debe tener al menos 6 caracteres, por favor usa al menos 1 caracter especial.",
+      );
       return;
     }
 
@@ -42,9 +45,11 @@ export const AuthPage = () => {
       } else {
         await login(email.trim(), password);
       }
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      setError(err.message || 'Error en la autenticación. Verifica tus credenciales.');
+      setError(
+        err.message || "Error en la autenticación. Verifica tus credenciales.",
+      );
     } finally {
       setLoading(false);
     }
@@ -64,12 +69,12 @@ export const AuthPage = () => {
             </span>
           </Link>
           <h1 className="text-2xl font-bold text-[#f8fbff]">
-            {isRegister ? 'Crea tu cuenta' : 'Bienvenido de nuevo'}
+            {isRegister ? "Crea tu cuenta" : "Bienvenido de nuevo"}
           </h1>
           <p className="text-xs text-[#98a2b3] mt-1">
             {isRegister
-              ? 'Únete a la plataforma para publicar y reproducir videos'
-              : 'Ingresa tus credenciales para acceder a tu cuenta'}
+              ? "Únete a la plataforma para publicar y reproducir videos"
+              : "Ingresa tus credenciales para acceder a tu cuenta"}
           </p>
         </div>
 
@@ -115,7 +120,11 @@ export const AuthPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
-              helpText={isRegister ? 'Mínimo 6 caracteres' : undefined}
+              helpText={
+                isRegister
+                  ? "Mínimo 6 caracteres, incluye al menos 1 caracter especial"
+                  : undefined
+              }
             />
 
             <Button
@@ -126,23 +135,23 @@ export const AuthPage = () => {
               className="mt-2 w-full justify-center"
               icon={ArrowRight}
             >
-              {isRegister ? 'Registrarse' : 'Iniciar Sesión'}
+              {isRegister ? "Registrarse" : "Iniciar Sesión"}
             </Button>
           </form>
 
           {/* Toggle Login / Register */}
           <div className="mt-6 pt-5 border-t border-[#7aa7ff]/12 text-center">
             <p className="text-xs text-[#98a2b3]">
-              {isRegister ? '¿Ya tienes una cuenta?' : '¿No tienes una cuenta?'}
+              {isRegister ? "¿Ya tienes una cuenta?" : "¿No tienes una cuenta?"}
               <button
                 type="button"
                 onClick={() => {
                   setIsRegister(!isRegister);
-                  setError('');
+                  setError("");
                 }}
                 className="ml-1.5 text-[#bcd3ff] font-semibold hover:text-[#ffffff] hover:underline cursor-pointer"
               >
-                {isRegister ? 'Inicia sesión aquí' : 'Regístrate aquí'}
+                {isRegister ? "Inicia sesión aquí" : "Regístrate aquí"}
               </button>
             </p>
           </div>
@@ -150,7 +159,10 @@ export const AuthPage = () => {
 
         {/* Back link */}
         <div className="text-center mt-6">
-          <Link to="/" className="text-xs text-[#778295] hover:text-[#d8dee8] transition-colors">
+          <Link
+            to="/"
+            className="text-xs text-[#778295] hover:text-[#d8dee8] transition-colors"
+          >
             ← Volver a la página principal
           </Link>
         </div>
