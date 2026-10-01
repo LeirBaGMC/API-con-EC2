@@ -61,15 +61,16 @@ jobs:
 
       - name: Sync static assets to S3
         run: |
-          echo "Sincronizando dist con S3: ${{ vars.S3_BUCKET_NAME }}..."
-          # Sincronizar archivos estáticos con caché prolongado (excluyendo index.html)
-          aws s3 sync dist s3://${{ vars.S3_BUCKET_NAME }} \
+          BUCKET=$(echo "${{ vars.S3_BUCKET_NAME }}" | tr -d '[:space:]')
+          echo "Sincronizando dist con S3: $BUCKET..."
+          # Sincronizar archivos estaticos con cache prolongado (excluyendo index.html)
+          aws s3 sync dist "s3://${BUCKET}" \
             --delete \
             --cache-control "max-age=31536000,public,immutable" \
             --exclude "index.html"
 
-          # Subir index.html sin caché para que los usuarios siempre obtengan la última versión
-          aws s3 cp dist/index.html s3://${{ vars.S3_BUCKET_NAME }}/index.html \
+          # Subir index.html sin cache para que los usuarios siempre obtengan la ultima version
+          aws s3 cp dist/index.html "s3://${BUCKET}/index.html" \
             --cache-control "max-age=0,no-cache,no-store,must-revalidate"
 
       - name: Invalidate CloudFront Cache (Optional)
