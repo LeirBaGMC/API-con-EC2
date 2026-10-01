@@ -18,16 +18,28 @@ const getHeaders = (isFormData = false) => {
 };
 
 const handleResponse = async (response) => {
+  const contentType = response.headers.get('content-type') || '';
   if (!response.ok) {
     let errorDetail = 'Ocurrió un error en la petición';
-    try {
-      const data = await response.json();
-      errorDetail = data.detail || data.message || JSON.stringify(data);
-    } catch {
-      errorDetail = response.statusText || errorDetail;
+    if (contentType.includes('application/json')) {
+      try {
+        const data = await response.json();
+        errorDetail = data.detail || data.message || JSON.stringify(data);
+      } catch {
+        errorDetail = response.statusText || errorDetail;
+      }
+    } else {
+      errorDetail = response.statusText || `Error HTTP ${response.status}`;
     }
     throw new Error(errorDetail);
   }
+
+  if (!contentType.includes('application/json')) {
+    throw new Error(
+      'La solicitud devolvió HTML en vez de la API. Verifica en CloudFront que el Behavior /videos* tenga habilitado "Allowed HTTP methods: GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE" y apunte a la EC2.'
+    );
+  }
+
   return response.json();
 };
 

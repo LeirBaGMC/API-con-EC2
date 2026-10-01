@@ -48,6 +48,12 @@ export const UploadModal = ({ isOpen, onClose, onVideoPublished }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('Debes iniciar sesión con una cuenta para poder publicar un video.');
+      return;
+    }
+
     if (!title.trim()) {
       setError('El título del video es obligatorio.');
       return;
