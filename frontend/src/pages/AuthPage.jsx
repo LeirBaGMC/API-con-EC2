@@ -88,7 +88,7 @@ export const AuthPage = () => {
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {isRegister && (
               <FormField
-                label="Nombre completo, porfavor ingresa tu nombre y apellido"
+                label="Hola Dario"
                 required
                 icon={User}
                 placeholder="Ej. Juan Pérez"
