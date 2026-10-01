@@ -32,7 +32,7 @@ export const AuthPage = () => {
       return;
     }
     if (password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres.");
+      setError("Contraseña.");
       return;
     }
 
@@ -118,7 +118,7 @@ export const AuthPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
-              helpText={isRegister ? "Mínimo 6 caracteres" : undefined}
+              helpText={isRegister ? "Contraseña segura" : undefined}
             />
 
             <Button
