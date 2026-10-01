@@ -1,8 +1,9 @@
-// Base URL configurable via environment variable, CloudFront or local dev
-export const API_BASE_URL =
+const rawApiUrl =
   import.meta.env.VITE_API_URL !== undefined
     ? import.meta.env.VITE_API_URL
     : (import.meta.env.DEV ? 'http://localhost:8080' : '');
+
+export const API_BASE_URL = (rawApiUrl || '').trim().replace(/\/+$/, '');
 
 const getHeaders = (isFormData = false) => {
   const token = localStorage.getItem('token');

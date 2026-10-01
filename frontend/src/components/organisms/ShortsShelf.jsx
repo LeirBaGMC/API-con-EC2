@@ -5,7 +5,9 @@ import { ShortPlaceholderCard } from '../molecules/ShortPlaceholderCard';
 
 const resolveMediaUrl = (url) => {
   if (!url) return 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800';
-  return url.startsWith('http') ? url : `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}${url}`;
+  if (url.startsWith('http')) return url;
+  const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:8080').trim().replace(/\/+$/, '');
+  return `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
 };
 
 export const ShortsShelf = ({ videos = [], placeholderCount = 5 }) => {

@@ -193,10 +193,11 @@ export const ProfilePage = () => {
           {profile.videos && profile.videos.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {profile.videos.map((vid) => {
+                const baseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:8080').trim().replace(/\/+$/, '');
                 const thumbnailSrc = vid.thumbnail_url?.startsWith('http')
                   ? vid.thumbnail_url
                   : vid.thumbnail_url
-                  ? `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}${vid.thumbnail_url}`
+                  ? `${baseUrl}${vid.thumbnail_url.startsWith('/') ? '' : '/'}${vid.thumbnail_url}`
                   : 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800';
 
                 return (
